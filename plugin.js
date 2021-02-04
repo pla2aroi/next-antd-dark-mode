@@ -34,16 +34,16 @@ class Plugin {
  * @param {Object} options.customThemes.compact
  */
 module.exports = function generate(options) {
-  const defaultAntDir = path.join(__dirname, './node_modules/antd')
+  const defaultAntDir = path.join('node_modules/antd')
   const themeOptions = {
     antDir: defaultAntDir,
     antdStylesDir: path.join(defaultAntDir, 'lib'),
-    antdComponentFile: path.join(defaultAntDir, './dist/antd.less'),
+    antdComponentFile: path.join(defaultAntDir, 'dist/antd.less'),
     stylesDir: undefined,
     varFile: undefined,
     themeVariables: [], // ['@primary-color']
     customColorRegexArray: [],
-    outputFilePath: path.join(__dirname, './.next/static/color.less'),
+    outputFilePath: path.join('./.next/static/color.less'),
     lessFilePath: '/_next/static/color.less',
     lessJSPath: 'https://cdnjs.cloudflare.com/ajax/libs/less.js/4.1.1/less.min.js',
     prefix: 'antd',
