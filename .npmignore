@@ -1,7 +1,6 @@
 .*
 *.map
 *.spec.*
-*.ts
 __test__/
 .vscode/
 src/

@@ -1,3 +1,7 @@
+## 0.0.7
+- Add typings
+## 0.0.6
+- Remove path file in package.json
 ## 0.0.5
 - Testing useDarkMode
 ## 0.0.4
