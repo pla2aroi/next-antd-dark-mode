@@ -1,7 +1,7 @@
 export interface DarkModeConfig {
     lessJSPath: string;
     lessFilePath: string;
-    isDebugLog: boolean;
+    isDebugLog?: boolean;
 }
 export interface DarkMode {
     isLoadScript: boolean;

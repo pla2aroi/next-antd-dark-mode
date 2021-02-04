@@ -147,26 +147,34 @@ module.exports = function generate(options) {
   }
 
   return (nextConfig = {}) => {
-    return {
-      ...nextConfig,
-      publicRuntimeConfig: {
-        ...nextConfig.publicRuntimeConfig,
-        next_antd_dark_mode: { themes, lessFilePath, lessJSPath },
-      },
-      lessLoaderOptions: {
-        ...nextConfig.lessLoaderOptions,
-        modifyVars: {
-          ...(!!nextConfig.lessLoaderOptions && nextConfig.lessLoaderOptions.modifyVars),
-          ...varsAntd,
+    return Object.assign(
+      {},
+      {
+        ...nextConfig,
+        publicRuntimeConfig: {
+          ...nextConfig.publicRuntimeConfig,
+          next_antd_dark_mode: { themes, lessFilePath, lessJSPath },
+        },
+        lessLoaderOptions: {
+          ...nextConfig.lessLoaderOptions,
+          modifyVars: {
+            ...(!!nextConfig.lessLoaderOptions &&
+              nextConfig.lessLoaderOptions.modifyVars),
+            ...varsAntd,
+          },
         },
       },
-      webpack(config, options) {
-        config.plugins.push(new Plugin(generator))
+      {
+        webpack(config, options) {
+          config.plugins.push(new Plugin(generator))
 
-        return typeof nextConfig.webpack === 'function'
-          ? nextConfig.webpack(config, options)
-          : config
+          if (typeof nextConfig.webpack === 'function') {
+            return nextConfig.webpack(config, options)
+          }
+
+          return config
+        },
       },
-    }
+    )
   }
 }
