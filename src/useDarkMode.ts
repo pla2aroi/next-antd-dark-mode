@@ -10,12 +10,6 @@ const loadLess = (src: string) => {
   return link
 }
 
-declare global {
-  interface Window {
-    less: any
-  }
-}
-
 const useDarkMode = (options: DarkModeConfig): DarkMode => {
   const [isLoadScript, setIsLoadScript] = useState<boolean>(false)
 
@@ -26,10 +20,10 @@ const useDarkMode = (options: DarkModeConfig): DarkMode => {
       if (!window.less) return
       window.less.options.env = 'production'
       window.less.options.async = false
-      window.less.options.logLevel = 0
+      window.less.options.logLevel = options.isDebugLog ? 2 : 0
       window.less.options.javascriptEnabled = true
       window.less.sheets = [loadLess(options.lessFilePath)]
-      setTimeout(() => setIsLoadScript(true), 500)
+      setTimeout(() => setIsLoadScript(true), 100)
     },
   })
 
@@ -45,7 +39,10 @@ const useDarkMode = (options: DarkModeConfig): DarkMode => {
           cb(false)
           console.error('failed to update theme')
         })
+
+      return
     }
+    cb(false)
   }
 
   return {

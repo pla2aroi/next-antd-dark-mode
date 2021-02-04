@@ -142,7 +142,7 @@ module.exports = function generate(options) {
         )
       }
     } catch (e) {
-      console.error('ThemeAntDesignPlugin ', e)
+      console.error('❌ NextAntDesignDarkModePlugin ', e)
     }
   }
 
@@ -151,7 +151,7 @@ module.exports = function generate(options) {
       ...nextConfig,
       publicRuntimeConfig: {
         ...nextConfig.publicRuntimeConfig,
-        next_dynamic_antd_theme: { themes, lessFilePath, lessJSPath },
+        next_antd_dark_mode: { themes, lessFilePath, lessJSPath },
       },
       lessLoaderOptions: {
         ...nextConfig.lessLoaderOptions,

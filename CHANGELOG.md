@@ -1,3 +1,7 @@
+## 0.1.1
+- Edit readme.md
+## 0.1.0
+- Add options isDebugLog of useDarkMode
 ## 0.0.7
 - Add typings
 ## 0.0.6
