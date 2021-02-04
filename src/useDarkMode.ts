@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useScript from 'react-script-hook'
+import { DarkMode, DarkModeConfig } from 'typings/index'
 
 const loadLess = (src: string) => {
   const link = document.createElement('link')
@@ -9,7 +10,13 @@ const loadLess = (src: string) => {
   return link
 }
 
-const useDarkMode = (options: { lessJSPath: string; lessFilePath: string }) => {
+declare global {
+  interface Window {
+    less: any
+  }
+}
+
+const useDarkMode = (options: DarkModeConfig): DarkMode => {
   const [isLoadScript, setIsLoadScript] = useState<boolean>(false)
 
   useScript({

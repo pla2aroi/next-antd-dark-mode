@@ -1,18 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "strict": true,
-    "module": "commonjs",
-    "noEmitOnError": true,
-    "noImplicitAny": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "removeComments": true,
     "sourceMap": true,
+    "jsx": "preserve",
     "baseUrl": ".",
-    "removeComments": true
+    "paths": {
+      "@/*": ["./src/*"],
+    }
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/*.test.ts", "dist"],
   "include": ["**/*.ts"]
 }
