@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useScript from 'react-script-hook'
-import { DarkMode, DarkModeConfig } from 'typings/index'
+import { DarkMode, DarkModeConfig } from './types'
 
 const loadLess = (src: string) => {
   const link = document.createElement('link')

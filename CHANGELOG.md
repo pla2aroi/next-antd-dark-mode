@@ -1,3 +1,5 @@
+## 0.0.5
+- Testing useDarkMode
 ## 0.0.4
 - Testing next-antd-dark-mode
 - Add path git

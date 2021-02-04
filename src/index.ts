@@ -1,1 +1,1 @@
-export { default } from '@/useDarkMode'
+export { default } from './useDarkMode'

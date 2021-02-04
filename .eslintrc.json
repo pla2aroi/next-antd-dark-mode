@@ -190,8 +190,12 @@
     ],
     "react/jsx-filename-extension": [
       "error",
+      "ignorePackages",
       {
-        "extensions": [".ts", ".tsx"]
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
     ],
     // typescript
