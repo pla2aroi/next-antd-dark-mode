@@ -1,6 +1,6 @@
 {
   "name": "next-antd-dark-mode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Plugin for next to change ant design theme (dark, light) mode",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
