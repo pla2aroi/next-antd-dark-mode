@@ -14,6 +14,12 @@ or
 yarn add next-antd-dark-mode
 ```
 
+## DEMO
+https://try-next-antd-dark-mode-lw76r30wl.vercel.app/
+
+
+## Setting
+
 💅 file -> antd-component.less
 ```
 //https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
@@ -85,7 +91,7 @@ yarn add next-antd-dark-mode
 @animation-duration-base: 0.1s;
 ```
 
-next.config.js
+📝 next.config.js
 
 ```
 🤔 npm i @zeit/next-less --save
@@ -142,13 +148,13 @@ const nextConfig = {
 module.exports = withPlugins([[withAntdTheme], [withLess]], nextConfig)
 ```
 
-pages/_app.tsx or pages/_app.js
+📝 pages/_app.tsx or pages/_app.js
 
 ```
 import '(path your)/styles/antd-component.less'
 ```
 
-pages/index.tsx or pages/index.js
+📝 pages/index.tsx or pages/index.js
 
 ```
 import { ReactElement } from 'react'
@@ -230,3 +236,6 @@ const Home = (): ReactElement => {
 export default Home
 ```
 
+## License
+
+[MIT](LICENSE)
