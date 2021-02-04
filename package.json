@@ -1,0 +1,61 @@
+{
+  "name": "next-antd-dark-mode",
+  "version": "0.0.1",
+  "description": "Plugin for next to change ant design theme (dark, light) mode",
+  "main": "src/index.ts",
+  "keywords": [
+    "antd",
+    "antd theme",
+    "theme",
+    "next ant design dark mode",
+    "ant.design dark mode"
+  ],
+  "author": "Pla2aroi <echo.pla2aroi@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/pla2aroi/postcss-css-vars-to-less-antd/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/pla2aroi/postcss-css-vars-to-less-antd/issues",
+    "email": "echo.pla2aroi@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pla2aroi/postcss-css-vars-to-less-antd.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/balanced-match": "^1.0.1",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "@types/react": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-babel-module": "^5.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "glob": "^7.1.6",
+    "hash.js": "^1.1.7",
+    "jest": "^26.6.3",
+    "less": "^4.1.1",
+    "less-bundle-promise": "^1.0.7",
+    "less-plugin-npm-import": "^2.1.0",
+    "postcss": "^8.2.4",
+    "prettier": "^2.2.1",
+    "strip-css-comments": "^4.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-script-hook": "^1.2.1"
+  }
+}

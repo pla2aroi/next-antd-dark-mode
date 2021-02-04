@@ -1,0 +1,12 @@
+.*
+*.map
+*.spec.*
+*.ts
+__test__/
+.vscode/
+src/
+coverage/
+node_modules/
+babel.config.js
+tsconfig.json
+tslint.json

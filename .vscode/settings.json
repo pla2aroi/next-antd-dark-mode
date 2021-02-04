@@ -1,0 +1,16 @@
+{
+  "eslint.validate": ["typescript"],
+  "typescript.validate.enable": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "javascript.validate.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true,
+  },
+  "files.associations": {
+    "*.ts": "typescript"
+  },
+  "editor.tabCompletion": "on",
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true
+}

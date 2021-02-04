@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "strict": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "sourceMap": true,
+    "baseUrl": ".",
+    "removeComments": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts"]
+}
