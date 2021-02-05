@@ -95,7 +95,9 @@ https://try-next-antd-dark-mode.vercel.app/
 
 ```
 🤔 npm i @zeit/next-less --save
+🤔 npm i next-compose-plugins --save
 
+const withPlugins = require('next-compose-plugins')
 const withLess = require('@zeit/next-less')
 const generateTheme = require('next-antd-dark-mode/plugin')
 
@@ -151,7 +153,18 @@ module.exports = withPlugins([[withAntdTheme], [withLess]], nextConfig)
 📝 pages/_app.tsx || pages/_app.js
 
 ```
+* import file antd-component.less in _app.tsx || _app.js
+...
 import '(path your)/styles/antd-component.less'
+...
+
+or
+
+* import file antd-component.less in pages/index.tsx || pages/index.js
+...
+import '(path your)/styles/antd-component.less'
+...
+
 ```
 
 📝 pages/index.tsx || pages/index.js
