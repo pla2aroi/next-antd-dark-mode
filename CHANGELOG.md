@@ -1,3 +1,5 @@
+## 1.0.2
+- Update readme.md url demo
 ## 1.0.1
 - Add check @ts-check
 - Update readme.md

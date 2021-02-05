@@ -15,7 +15,7 @@ yarn add next-antd-dark-mode
 ```
 
 ## DEMO
-https://try-next-antd-dark-mode-drgdd3mhz.vercel.app/
+https://try-next-antd-dark-mode.vercel.app/
 
 
 ## Setting
