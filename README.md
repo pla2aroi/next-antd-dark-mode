@@ -168,13 +168,13 @@ const { publicRuntimeConfig = {} } = getConfig() || {}
 const { next_antd_dark_mode = {} } = publicRuntimeConfig
 const { themes, lessFilePath, lessJSPath } = next_antd_dark_mode
 
+const DISABLE_ANIMATION = 'disable-animation'
+
 const Home = (): ReactElement => {
   const { isLoadScript, onModifyVars } = useDarkMode({ lessJSPath, lessFilePath })
 
   const changeTheme = (theme: Record<string, string> | string) => {
-
-    const disableAnimation = document.getElementById('disable-animation')
-    if (!disableAnimation) {
+    if (!document.getElementById(DISABLE_ANIMATION)) {
       const css = `*, *::before, *::after {
         transition: none !important;
         animation-duration: 0s !important;
@@ -182,14 +182,14 @@ const Home = (): ReactElement => {
       const head = document.head || document.getElementsByTagName('head')[0]
       const style = document.createElement('style')
       head.appendChild(style)
-      style.id = 'disable-animation'
+      style.id = DISABLE_ANIMATION
       style.appendChild(document.createTextNode(css))
     }
 
     if (typeof theme === 'string') {
       onModifyVars({ ...themes.default, ...themes[theme] }, () => {
         setTimeout(() => {
-          disableAnimation?.remove()
+          document.getElementById(DISABLE_ANIMATION)?.remove()
         }, 100)
       })
       return
@@ -197,7 +197,7 @@ const Home = (): ReactElement => {
 
     onModifyVars({ ...themes.default, ...theme }, () => {
       setTimeout(() => {
-        disableTransitionDom?.remove()
+        document.getElementById(DISABLE_ANIMATION)?.remove()
       }, 100)
     })
   }

@@ -1,5 +1,6 @@
 ## 1.0.1
 - Add check @ts-check
+- Update readme.md
 ## 1.0.0
 - Check generate varFile undefined
 - Change default isLoadScript
