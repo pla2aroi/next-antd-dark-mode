@@ -18,9 +18,9 @@ const useDarkMode = (options: DarkModeConfig): DarkMode => {
     checkForExisting: true,
     onload: () => {
       if (!window.less) return
-      window.less.options.env = 'production'
+      window.less.options.env = !!options.isDebugLog ? 'development' : 'production'
       window.less.options.async = false
-      window.less.options.logLevel = options.isDebugLog ? 2 : 0
+      window.less.options.logLevel = !!options.isDebugLog ? 2 : 0
       window.less.options.javascriptEnabled = true
       window.less.sheets = [loadLess(options.lessFilePath)]
       setTimeout(() => setIsLoadScript(false), 100)

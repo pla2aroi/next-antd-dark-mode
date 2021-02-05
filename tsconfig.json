@@ -4,6 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "checkJs": false,
     "jsx": "react",
     "declaration": true,
     "pretty": true,

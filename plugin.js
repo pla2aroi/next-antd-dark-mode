@@ -1,15 +1,25 @@
+// @ts-check
 const fs = require('fs')
 const path = require('path')
 const { generateTheme, getLessVars } = require('./generate')
 
 let cache = ''
 class Plugin {
+  /**
+   * @param {() => Promise<void>} generator
+   */
   constructor(generator) {
     this.generator = generator
   }
 
+  /**
+   * @param {{ hooks: { emit: { tapAsync: (arg0: string, arg1: (_: any, callback: () => void) => Promise<void>) => void; }; }; }} compiler
+   */
   apply(compiler) {
-    compiler.hooks.emit.tapAsync('NextAntDesignDarkModePlugin', async (_, callback) => {
+    compiler.hooks.emit.tapAsync('NextAntDesignDarkModePlugin', async (
+      /** @type {any} */ _,
+      /** @type {() => void} */ callback,
+    ) => {
       this.generator()
       callback()
     })
@@ -20,8 +30,8 @@ class Plugin {
  * @param {Object} options
  * @param {string} options.antDir
  * @param {string} options.antdStylesDir
- * @param {string} options.stylesDir
- * @param {string} options.varFile
+ * @param {string | undefined} options.stylesDir
+ * @param {string | undefined} options.varFile
  * @param {string[]} options.themeVariables
  * @param {string[]} options.customColorRegexArray
  * @param {string} options.outputFilePath
@@ -94,8 +104,8 @@ module.exports = function generate(options) {
   const generator = async () => {
     try {
       const dir = path.dirname(outputFilePath)
-      if (!(await fs.existsSync(dir))) {
-        await fs.mkdirSync(dir)
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir)
       }
       const temp = await generateTheme({
         antDir,
@@ -109,7 +119,7 @@ module.exports = function generate(options) {
       })
       if (temp !== cache) {
         cache = temp
-        await fs.appendFileSync(
+        fs.appendFileSync(
           outputFilePath,
           `
 .${prefix}-tag-pink {  color: #eb2f96;  background: #fff0f6;  border-color: #ffadd2;}
@@ -165,6 +175,10 @@ module.exports = function generate(options) {
         },
       },
       {
+        /**
+         * @param {{ plugins: Plugin[]; }} config
+         * @param {any} options
+         */
         webpack(config, options) {
           config.plugins.push(new Plugin(generator))
 

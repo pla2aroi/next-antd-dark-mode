@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable no-param-reassign, no-cond-assign, prefer-destructuring, no-restricted-globals */
 const fs = require('fs')
 const path = require('path')
@@ -34,7 +35,8 @@ const COLOR_FUNCTIONS = [
 ]
 
 const defaultColorRegexArray = COLOR_FUNCTIONS.map((name) => new RegExp(`${name}\(.*\)`))
-defaultColorRegexArray.matches = (color) => {
+// @ts-ignore
+defaultColorRegexArray.matches = (/** @type {string} */ color) => {
   return defaultColorRegexArray.reduce((prev, regex) => {
     return prev || regex.test(color)
   }, false)
@@ -55,6 +57,8 @@ function randomColor() {
  * @link-color -> @primary-color ->  #1890ff
  * Which means
  * @link-color: #1890ff
+ * @param {string} varName
+ * @param {{ [x: string]: any; }} mappings
  */
 function getColor(varName, mappings) {
   const color = mappings[varName]
@@ -82,6 +86,7 @@ function getColor(varName, mappings) {
  *    '@text-color': '#cccccc'
  *    ....
  * }
+ * @param {string} content
  */
 function generateColorMap(content, customColorRegexArray = []) {
   return content
@@ -131,6 +136,9 @@ function generateColorMap(content, customColorRegexArray = []) {
  * }
  */
 const reducePlugin = () => {
+  /**
+   * @param {import('postcss').Rule} rule
+   */
   const cleanRule = (rule) => {
     if (rule.selector.startsWith('.main-color .palatte-')) {
       rule.remove()
@@ -164,16 +172,26 @@ const reducePlugin = () => {
 
   return {
     postcssPlugin: 'reducePlugin',
+
+    /**
+     * @param {import('postcss').Root} root
+     */
     Once(root) {
       root.walkAtRules((atRule) => {
         atRule.remove()
       })
       root.walkRules(cleanRule)
-      root.walkComments((c) => c.remove())
+      root.walkComments((c) => {
+        c.remove()
+      })
     },
   }
 }
 
+/**
+ * @param {string} string
+ * @param {RegExp} regex
+ */
 function getMatches(string, regex) {
   const matches = {}
   let match
@@ -187,8 +205,11 @@ function getMatches(string, regex) {
 
 /**
  * This function takes less input as string and compiles into css.
+ * @param {string} text
+ * @param {string[]} paths
  */
 function render(text, paths) {
+  // @ts-ignore
   return less.render(text, {
     paths,
     javascriptEnabled: true,
@@ -210,6 +231,7 @@ function render(text, paths) {
  *    '@heading-color' : '#fa8c16',
  *    '@text-color' : '#cccccc'
  * }
+ * @param {number | fs.PathLike} filtPath
  */
 function getLessVars(filtPath) {
   const sheet = fs.readFileSync(filtPath).toString()
@@ -229,6 +251,7 @@ function getLessVars(filtPath) {
  * .e.g
  * Input: @primary-1
  * Output: color(~`colorPalette("@{primary-color}", ' 1 ')`)
+ * @param {string} varName
  */
 function getShade(varName) {
   const varNameMatch = varName.match(/(.*)-(\d)/)
@@ -250,6 +273,7 @@ function getShade(varName) {
  * isValidColor('#fff'); //true
  * isValidColor('rgba(0, 0, 0, 0.5)'); //true
  * isValidColor('20px'); //false
+ * @param {string} color
  */
 function isValidColor(color, customColorRegexArray = []) {
   if (color && color.includes('rgb')) return true
@@ -272,6 +296,11 @@ function isValidColor(color, customColorRegexArray = []) {
   return false
 }
 
+/**
+ * @param {string} stylesDir
+ * @param {string} antdStylesDir
+ * @param {string} varPath
+ */
 async function compileAllLessFilesToCss(stylesDir, antdStylesDir, varMap = {}, varPath) {
   /**
    * Get all less files path in styles directory
@@ -316,6 +345,7 @@ async function compileAllLessFilesToCss(stylesDir, antdStylesDir, varMap = {}, v
 
       fileContent = `@import "${varPath}";\n${fileContent}`
       // fileContent = `@import "~antd/lib/style/themes/default.less";\n${fileContent}`;
+      // @ts-ignore
       return less
         .render(fileContent, {
           paths: [antdStylesDir].concat(stylesDir),
@@ -336,6 +366,7 @@ async function compileAllLessFilesToCss(stylesDir, antdStylesDir, varMap = {}, v
 
   return csss
     .map((c) => {
+      // @ts-ignore
       const css = stripCssComments(c.css || '', { preserve: false })
       const hashCode = hash.sha256().update(css).digest('hex')
       if (hashCode in hashes) {
@@ -437,6 +468,7 @@ async function generateTheme({
       src: antdStylesFile,
     })
 
+    // @ts-ignore
     customColorRegexArray = [...customColorRegexArray, ...defaultColorRegexArray]
     const mappings = Object.assign(
       generateColorMap(varFileContent, customColorRegexArray),
@@ -501,7 +533,7 @@ async function generateTheme({
     const fadeMap = {}
     const fades = antdLess.match(/fade\(.*\)/g)
     if (fades) {
-      fades.forEach((fade) => {
+      fades.forEach((/** @type {string} */ fade) => {
         if (
           !fade.startsWith('fade(@black') &&
           !fade.startsWith('fade(@white') &&
@@ -526,20 +558,21 @@ async function generateTheme({
     })
 
     COLOR_FUNCTIONS.slice(1).forEach((name) => {
-      antdLess = antdLess.replace(
-        new RegExp(`${name}\\((.*), \\d+%\\)`, 'g'),
-        (fullmatch, group) => {
-          if (mappings[group]) {
-            return `~'${fullmatch}'`
-          }
-          return fullmatch
-        },
-      )
+      antdLess = antdLess.replace(new RegExp(`${name}\\((.*), \\d+%\\)`, 'g'), (
+        /** @type {string} */ fullmatch,
+        /** @type {string | number} */ group,
+      ) => {
+        if (mappings[group]) {
+          return `~'${fullmatch}'`
+        }
+        return fullmatch
+      })
     })
 
     antdLess = `${antdLess}\n${varsCombined}`
     const { css: antCss } = await render(antdLess, [antdPath, antdStylesDir])
     const allCss = `${antCss}\n${userCustomCss}`
+    // @ts-ignore
     results = await postcss([reducePlugin]).process(allCss, {
       from: antdStylesFile,
     })
@@ -612,7 +645,7 @@ async function generateTheme({
   }
 }
 
-const minifyCss = (css) => {
+const minifyCss = (/** @type {string} */ css) => {
   css = css.replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').replace(/^\s*$(?:\r\n?|\n)/gm, '')
   css = css.replace(/\{(\r\n?|\n)\s+/g, '{')
   css = css.replace(/;(\r\n?|\n)\}/g, ';}')
@@ -621,9 +654,12 @@ const minifyCss = (css) => {
   return css
 }
 
-const combineLess = (filePath, nodeModulesPath) => {
+const combineLess = (
+  /** @type {string | number | fs.PathLike} */ filePath,
+  /** @type {string} */ nodeModulesPath,
+) => {
   const fileContent = fs.readFileSync(filePath).toString()
-  const directory = path.dirname(filePath)
+  const directory = path.dirname(`${filePath}`)
   return fileContent
     .split('\n')
     .map((line) => {

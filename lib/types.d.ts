@@ -9,6 +9,15 @@ export interface DarkMode {
 }
 declare global {
     interface Window {
-        less: any;
+        less: {
+            options: {
+                env: string;
+                async: boolean;
+                logLevel: number;
+                javascriptEnabled: boolean;
+            };
+            modifyVars: (vars: Record<string, string>) => Promise<void>;
+            sheets: Array<HTMLLinkElement>;
+        };
     }
 }
