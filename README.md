@@ -236,6 +236,10 @@ const Home = (): ReactElement => {
 export default Home
 ```
 
+## Inspiration
+- [next-dynamic-antd-theme](https://www.npmjs.com/package/next-dynamic-antd-theme "next-dynamic-antd-theme")
+- [antd-theme-generator](https://github.com/mzohaibqc/antd-theme-generator "antd-theme-generator")
+
 ## License
 
 [MIT](LICENSE)
