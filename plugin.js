@@ -71,7 +71,7 @@ module.exports = function generate(options) {
   } = themeOptions
 
   const themes = {}
-  const varsAntd = getLessVars(varFile)
+  const varsAntd = !!varFile ? getLessVars(varFile) : {}
   fs.readdirSync(path.join(antdStylesDir, 'style/themes')).forEach((file) => {
     const res = /(.*)\.less/.exec(file)
     if (!!res && res[1] !== 'index') {

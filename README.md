@@ -3,8 +3,8 @@ Plugin for next to change ant design theme ( 🌌 dark 🌇 light)
 
 [![version](https://img.shields.io/github/v/tag/pla2aroi/next-antd-dark-mode)](https://github.com/pla2aroi/next-antd-dark-mode/tags) [![License](https://img.shields.io/github/license/pla2aroi/next-antd-dark-mode)](./LICENSE) [![npm version](https://img.shields.io/npm/v/next-antd-dark-mode)](https://www.npmjs.com/package/next-antd-dark-mode)
 
-- ✅ chunk file antd component
-- ✅ custom variable  🌌 dark  🌇 light
+- ⚡ chunk file antd component
+- 💅 custom variable  🌌 dark  🌇 light
 
 
 ## Usage
@@ -148,13 +148,13 @@ const nextConfig = {
 module.exports = withPlugins([[withAntdTheme], [withLess]], nextConfig)
 ```
 
-📝 pages/_app.tsx or pages/_app.js
+📝 pages/_app.tsx || pages/_app.js
 
 ```
 import '(path your)/styles/antd-component.less'
 ```
 
-📝 pages/index.tsx or pages/index.js
+📝 pages/index.tsx || pages/index.js
 
 ```
 import { ReactElement } from 'react'
@@ -172,24 +172,24 @@ const Home = (): ReactElement => {
   const { isLoadScript, onModifyVars } = useDarkMode({ lessJSPath, lessFilePath })
 
   const changeTheme = (theme: Record<string, string> | string) => {
-    const disableTransitionDom = document.getElementById('disable-SSR-transition')
-    if (!disableTransitionDom) {
+
+    const disableAnimation = document.getElementById('disable-animation')
+    if (!disableAnimation) {
       const css = `*, *::before, *::after {
         transition: none !important;
         animation-duration: 0s !important;
       }`
       const head = document.head || document.getElementsByTagName('head')[0]
       const style = document.createElement('style')
-
       head.appendChild(style)
-      style.id = 'disable-SSR-transition'
+      style.id = 'disable-animation'
       style.appendChild(document.createTextNode(css))
     }
 
     if (typeof theme === 'string') {
       onModifyVars({ ...themes.default, ...themes[theme] }, () => {
         setTimeout(() => {
-          disableTransitionDom?.remove()
+          disableAnimation?.remove()
         }, 100)
       })
       return
@@ -204,7 +204,7 @@ const Home = (): ReactElement => {
 
   return (
     <div>
-      {isLoadScript && (
+      {!isLoadScript && (
         <>
           <Button
             type="primary"

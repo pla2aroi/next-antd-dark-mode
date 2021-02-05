@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useScript from 'react-script-hook'
-import { DarkMode, DarkModeConfig } from './types'
+import type { DarkMode, DarkModeConfig } from './types'
 
 const loadLess = (src: string) => {
   const link = document.createElement('link')
@@ -11,7 +11,7 @@ const loadLess = (src: string) => {
 }
 
 const useDarkMode = (options: DarkModeConfig): DarkMode => {
-  const [isLoadScript, setIsLoadScript] = useState<boolean>(false)
+  const [isLoadScript, setIsLoadScript] = useState<boolean>(true)
 
   useScript({
     src: options.lessJSPath,
@@ -23,7 +23,7 @@ const useDarkMode = (options: DarkModeConfig): DarkMode => {
       window.less.options.logLevel = options.isDebugLog ? 2 : 0
       window.less.options.javascriptEnabled = true
       window.less.sheets = [loadLess(options.lessFilePath)]
-      setTimeout(() => setIsLoadScript(true), 100)
+      setTimeout(() => setIsLoadScript(false), 100)
     },
   })
 

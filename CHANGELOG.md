@@ -1,3 +1,6 @@
+## 1.0.0
+- Check generate varFile undefined
+- Change default isLoadScript
 ## 0.1.2
 - Edit readme.md add url demo
 ## 0.1.1
