@@ -155,14 +155,14 @@ module.exports = withPlugins([[withAntdTheme], [withLess]], nextConfig)
 ```
 * import file antd-component.less in _app.tsx || _app.js
 ...
-import '(path your)/styles/antd-component.less'
+import '../styles/antd-component.less'
 ...
 
 or
 
 * import file antd-component.less in pages/index.tsx || pages/index.js
 ...
-import '(path your)/styles/antd-component.less'
+import '../styles/antd-component.less'
 ...
 
 ```
@@ -250,9 +250,9 @@ export default Home
 ```
 
 ## Inspiration
-- [next-dynamic-antd-theme](https://www.npmjs.com/package/next-dynamic-antd-theme "next-dynamic-antd-theme")
 - [antd-theme-generator](https://github.com/mzohaibqc/antd-theme-generator "antd-theme-generator")
 
 ## License
 
-[MIT](LICENSE)
+This project is licensed under the terms of the
+[MIT license](/LICENSE).

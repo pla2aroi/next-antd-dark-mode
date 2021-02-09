@@ -405,9 +405,10 @@ async function generateTheme({
   customColorRegexArray,
 }) {
   try {
-    const antdPath = antdStylesDir || path.join(antDir, 'lib')
+    const defaultAntDir = antDir || path.join('node_modules/antd')
+    const antdPath = antdStylesDir || path.join(defaultAntDir, 'lib')
     const nodeModulesPath = path.join(
-      antDir.slice(0, antDir.indexOf('node_modules')),
+      defaultAntDir.slice(0, defaultAntDir.indexOf('node_modules')),
       './node_modules',
     )
 
@@ -422,7 +423,8 @@ async function generateTheme({
       })
     }
 
-    const antdStylesFile = antdComponentFile || path.join(antDir, './dist/antd.less')
+    const antdStylesFile =
+      antdComponentFile || path.join(defaultAntDir, './dist/antd.less')
 
     /**
      * You own custom styles (Change according to your project structure)

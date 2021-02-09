@@ -1,3 +1,5 @@
+## 1.0.4
+- Fix default param antDir
 ## 1.0.3
 - Update readme.md
 ## 1.0.2
