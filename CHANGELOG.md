@@ -1,3 +1,5 @@
+## 1.0.5
+- Change default param callback in useDarkMode function onModifyVars
 ## 1.0.4
 - Fix default param antDir
 ## 1.0.3

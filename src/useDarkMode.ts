@@ -29,20 +29,21 @@ const useDarkMode = (options: DarkModeConfig): DarkMode => {
 
   const onModifyVars = (
     vars: Record<string, string>,
-    cb: (isFinish: boolean) => void,
+    cb?: (isFinish: boolean) => void,
   ) => {
-    if (!!window.less) {
-      window.less
-        .modifyVars(vars)
-        .then(() => cb(true))
-        .catch(() => {
-          cb(false)
-          console.error('failed to update theme')
-        })
-
+    if (!window.less) {
+      if (typeof cb === 'function') cb(false)
       return
     }
-    cb(false)
+
+    window.less
+      .modifyVars(vars)
+      .then(() => {
+        if (typeof cb === 'function') cb(true)
+      })
+      .catch(() => {
+        if (typeof cb === 'function') cb(false)
+      })
   }
 
   return {
